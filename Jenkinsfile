@@ -13,7 +13,7 @@ node('master') {
 	  sh 'sudo docker rm -f webapp'
 	}
        stage('Build DockerFile'){
-          sh 'sudo docker build -t smyaltamash/mywebsite:latest .'
+          sh 'sudo docker build -t smyaltamash/webapp:latest .'
        }
        stage('push to repo'){
 	sh 'sudo bash pushToRepo.sh'
@@ -22,6 +22,6 @@ node('master') {
 	sh 'sudo bash pullFromRepo.sh'
        }
        stage('Deploying the webapp'){
-	  sh 'sudo docker run -d --name webapp -p 80:80 king/mywebsite:latest'
+	  sh 'sudo docker run -d --name webapp -p 80:80 smyaltamash/webapp:latest'
     }
 }
