@@ -3,6 +3,7 @@
 node('master') {
        stage('Checkout'){
           checkout scm
+	  sh('whoami')
        }
         stage('Clearning unused docker images and dead container'){
             sh 'docker system prune -af'
