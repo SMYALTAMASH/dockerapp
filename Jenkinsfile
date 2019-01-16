@@ -6,16 +6,18 @@ node('master') {
 	  sh('whoami')
        }
         stage('Clearning unused docker images and dead container'){
-            sh 'docker system prune -af'
+            sh 'sudo docker system prune -af'
         }
-       stage('Remove old container'){
-          sh 'docker rm -f webapp'
-       }
+	stage('deleting old container')
+	{
+	  sh 'sudo docker rm -f webapp'
+	}
        stage('Build DockerFile'){
-          sh 'docker build -t king/mywebsite:latest .'
+          sh 'sudo docker build -t king/mywebsite:latest .'
        }
        stage('Deploying the webapp'){
-	  sh 'docker run -d --name webapp -p 80:80 king/mywebsite:latest'
+	  sh 'sudo docker run -d --name webapp -p 80:80 king/mywebsite:latest'
     }
 }
+
 
